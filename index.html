@@ -7,22 +7,21 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f293d 100%);
-      --card-bg: rgba(30, 41, 59, 0.7);
-      --card-border: rgba(255, 255, 255, 0.12);
-      --accent-pink: #ff3366;
-      --accent-orange: #ff9f43;
-      --accent-cyan: #00d2d3;
-      --accent-yellow: #feca57;
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+      --card-bg: rgba(255, 255, 255, 0.07);
+      --card-border: rgba(255, 255, 255, 0.15);
+      --accent-pink: #ff2a6d;
+      --accent-purple: #9d4edd;
+      --accent-cyan: #05d9e8;
+      --accent-yellow: #ffb703;
       --text-main: #ffffff;
-      --text-muted: #a0aec0;
+      --text-muted: #cbd5e1;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      /* Koristi sistemski font koji provereno podržava domaća slova na svim uređajima */
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -32,20 +31,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 25px 15px;
+      justify-content: center;
+      padding: 20px 15px;
       min-height: 100vh;
       overflow-x: hidden;
-      perspective: 1000px;
     }
 
-    /* Animated background elements */
+    /* Background Animated Blobs */
     .bg-blobs {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: 0;
       overflow: hidden;
       pointer-events: none;
     }
@@ -53,48 +52,134 @@
     .blob {
       position: absolute;
       border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.25;
+      filter: blur(80px);
+      opacity: 0.35;
       animation: float 8s ease-in-out infinite alternate;
     }
 
     .blob-1 {
       top: 10%;
       left: 10%;
-      width: 250px;
-      height: 250px;
+      width: 280px;
+      height: 280px;
       background: var(--accent-pink);
     }
 
     .blob-2 {
-      bottom: 15%;
+      bottom: 10%;
       right: 10%;
-      width: 280px;
-      height: 280px;
-      background: var(--accent-cyan);
+      width: 320px;
+      height: 320px;
+      background: var(--accent-purple);
       animation-delay: -4s;
     }
 
     @keyframes float {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-30px) scale(1.1); }
+      100% { transform: translateY(-40px) scale(1.1); }
     }
 
+    /* ENVELOPE / INTRO OVERLAY */
+    #intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-gradient);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .envelope-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 40px 25px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+      transform: scale(1);
+      animation: pulseCard 3s infinite alternate;
+    }
+
+    @keyframes pulseCard {
+      0% { transform: scale(0.98); }
+      100% { transform: scale(1.02); }
+    }
+
+    .envelope-icon {
+      font-size: 4.5rem;
+      margin-bottom: 15px;
+      display: inline-block;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .envelope-card h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #fff, var(--accent-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .envelope-card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    .open-btn {
+      background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+      color: #fff;
+      border: none;
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 12px 25px rgba(255, 42, 109, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+    }
+
+    .open-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* MAIN CONTENT */
     .container {
       width: 100%;
       max-width: 480px;
       text-align: center;
       z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
     }
 
-    /* Header styling */
     header {
       margin-top: 10px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .tag {
-      background: linear-gradient(90deg, var(--accent-pink), var(--accent-orange));
+      background: linear-gradient(90deg, var(--accent-pink), var(--accent-yellow));
       padding: 8px 20px;
       border-radius: 30px;
       font-weight: 800;
@@ -103,13 +188,7 @@
       letter-spacing: 2px;
       display: inline-block;
       margin-bottom: 15px;
-      box-shadow: 0 10px 20px rgba(255, 51, 102, 0.35);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      box-shadow: 0 10px 20px rgba(255, 42, 109, 0.3);
     }
 
     h1 {
@@ -121,7 +200,6 @@
       -webkit-text-fill-color: transparent;
       text-shadow: 0 10px 20px rgba(0,0,0,0.5);
       margin-bottom: 5px;
-      letter-spacing: -0.5px;
     }
 
     .subtitle {
@@ -131,7 +209,7 @@
       letter-spacing: 1px;
     }
 
-    /* 3D Glass Card Base */
+    /* Glass Card Base */
     .glass-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -140,17 +218,17 @@
       border: 1px solid var(--card-border);
       box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 
     /* Countdown Section */
     .countdown-card {
       padding: 22px;
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
 
     .countdown-title {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 800;
       margin-bottom: 18px;
       color: var(--accent-cyan);
@@ -190,22 +268,21 @@
 
     /* Scratch Section */
     .section-title {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 800;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      letter-spacing: -0.5px;
     }
 
     .scratch-container {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .scratch-card {
@@ -217,7 +294,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor: pointer;
     }
 
     .scratch-content {
@@ -232,7 +308,6 @@
       color: #fff;
       margin-bottom: 4px;
       line-height: 1.2;
-      letter-spacing: -0.3px;
     }
 
     .scratch-content p {
@@ -250,22 +325,64 @@
       touch-action: none;
       z-index: 2;
       transition: opacity 0.5s ease;
+      cursor: pointer;
     }
 
-    /* Location Section */
+    /* Google Maps Location Section */
     .location-card {
       padding: 22px;
       margin-bottom: 25px;
+      text-align: center;
     }
 
-    .location-card p {
-      font-size: 1.25rem;
+    .address-text {
+      font-size: 1.3rem;
       color: #fff;
-      font-weight: 800;
-      margin-top: 5px;
+      font-weight: 900;
+      margin-bottom: 15px;
       background: linear-gradient(90deg, #fff, var(--accent-cyan));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .map-preview {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin-bottom: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .map-preview iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: invert(90%) hue-rotate(180deg) contrast(1.2);
+      pointer-events: none; /* Omogućava klik na celo polje za otvaranje mapa */
+    }
+
+    .maps-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #4285F4;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px rgba(66, 133, 244, 0.4);
+      transition: transform 0.2s ease;
+      width: 100%;
+    }
+
+    .maps-btn:active {
+      transform: scale(0.96);
     }
 
     footer {
@@ -279,20 +396,27 @@
 </head>
 <body>
 
-  <!-- Background Animated Blobs -->
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
   </div>
 
-  <div class="container">
+  <div id="intro-overlay">
+    <div class="envelope-card">
+      <div class="envelope-icon">✉️</div>
+      <h2>Stigla ti je pozivnica!</h2>
+      <p>Luka te poziva na proslavu 12. rođendana!</p>
+      <button class="open-btn" onclick="openInvitation()">Otvori pozivnicu ✨</button>
+    </div>
+  </div>
+
+  <div class="container" id="main-content">
     <header>
       <div class="tag">🎉 VIP Pozivnica</div>
       <h1>Luka slavi 12! 🚀</h1>
       <p class="subtitle">5. septembar 2026.</p>
     </header>
 
-    <!-- Odbrojavanje -->
     <div class="glass-card countdown-card">
       <div class="countdown-title">⏳ Odbrojavanje do žurke</div>
       <div class="timer">
@@ -303,11 +427,9 @@
       </div>
     </div>
 
-    <!-- Srećke za grebanje -->
     <div class="section-title">🪙 Ogrebi i otkrij detalje</div>
     <div class="scratch-container">
       
-      <!-- Kartica 1 -->
       <div class="glass-card scratch-card" id="card1">
         <div class="scratch-content">
           <h3>🏡 Rođendan je u Lukinoj kući!</h3>
@@ -316,7 +438,6 @@
         <canvas id="scratch1"></canvas>
       </div>
 
-      <!-- Kartica 2 -->
       <div class="glass-card scratch-card" id="card2">
         <div class="scratch-content">
           <h3>⏰ Početak u 17:00h!</h3>
@@ -327,10 +448,18 @@
 
     </div>
 
-    <!-- Lokacija -->
     <div class="glass-card location-card">
       <div class="section-title">📍 Lokacija</div>
-      <p>1. Srpski ustanak 12</p>
+      <div class="address-text">1. Srpski ustanak 12</div>
+      
+      <a href="https://www.google.com/maps/search/?api=1&query=1.+Srpski+ustanak+12" target="_blank" style="text-decoration: none; display: block;">
+        <div class="map-preview">
+          <iframe src="https://maps.google.com/maps?q=1.%20Srpski%20ustanak%2012&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+        </div>
+        <div class="maps-btn">
+          📍 Otvori u Google Maps
+        </div>
+      </a>
     </div>
 
     <footer>
@@ -339,6 +468,29 @@
   </div>
 
   <script>
+    // Otvaranje pozivnice sa konfetama
+    function openInvitation() {
+      const overlay = document.getElementById('intro-overlay');
+      const content = document.getElementById('main-content');
+      
+      overlay.style.opacity = '0';
+      overlay.style.transform = 'scale(1.1)';
+      
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+        
+        // Vatromet konfeta pri otvaranju
+        confetti({
+          particleCount: 100,
+          spread: 80,
+          origin: { y: 0.5 }
+        });
+      }, 600);
+    }
+
+    // Tajmer do 5. septembra 2026. u 17:00h
     const targetDate = new Date('September 5, 2026 17:00:00').getTime();
 
     function updateTimer() {
@@ -365,7 +517,8 @@
     setInterval(updateTimer, 1000);
     updateTimer();
 
-    function initScratchCard(canvasId, cardId) {
+    // Srećke za grebanje
+    function initScratchCard(canvasId) {
       const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext('2d');
       
@@ -378,9 +531,9 @@
         canvas.height = height;
 
         const grad = ctx.createLinearGradient(0, 0, width, height);
-        grad.addColorStop(0, '#475569');
-        grad.addColorStop(0.5, '#94a3b8');
-        grad.addColorStop(1, '#334155');
+        grad.addColorStop(0, '#334155');
+        grad.addColorStop(0.5, '#64748b');
+        grad.addColorStop(1, '#1e293b');
 
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, width, height);
@@ -417,8 +570,8 @@
           setTimeout(() => canvas.remove(), 500);
 
           confetti({
-            particleCount: 80,
-            spread: 70,
+            particleCount: 70,
+            spread: 60,
             origin: { y: 0.6 }
           });
         }
@@ -459,8 +612,8 @@
     }
 
     window.onload = function() {
-      initScratchCard('scratch1', 'card1');
-      initScratchCard('scratch2', 'card2');
+      initScratchCard('scratch1');
+      initScratchCard('scratch2');
     };
   </script>
 </body>
