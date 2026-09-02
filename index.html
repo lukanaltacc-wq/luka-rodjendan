@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lukin 12. Rođendan!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
@@ -25,7 +22,8 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      /* Koristi sistemski font koji provereno podržava domaća slova na svim uređajima */
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
@@ -40,7 +38,7 @@
       perspective: 1000px;
     }
 
-    /* Background Blobs */
+    /* Animated background elements */
     .bg-blobs {
       position: fixed;
       top: 0;
@@ -115,15 +113,15 @@
     }
 
     h1 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 3rem;
-      font-weight: 800;
+      font-size: 2.8rem;
+      font-weight: 900;
       line-height: 1.1;
       background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 10px 20px rgba(0,0,0,0.5);
       margin-bottom: 5px;
+      letter-spacing: -0.5px;
     }
 
     .subtitle {
@@ -133,7 +131,7 @@
       letter-spacing: 1px;
     }
 
-    /* 3D Glass Card */
+    /* 3D Glass Card Base */
     .glass-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -175,9 +173,8 @@
     }
 
     .time-box span:first-child {
-      font-family: 'Baloo 2', cursive;
       font-size: 2rem;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--accent-yellow);
       display: block;
       line-height: 1;
@@ -193,7 +190,6 @@
 
     /* Scratch Section */
     .section-title {
-      font-family: 'Baloo 2', cursive;
       font-size: 1.6rem;
       font-weight: 800;
       margin-bottom: 18px;
@@ -202,6 +198,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      letter-spacing: -0.5px;
     }
 
     .scratch-container {
@@ -230,12 +227,12 @@
     }
 
     .scratch-content h3 {
-      font-family: 'Baloo 2', cursive;
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 2px;
+      margin-bottom: 4px;
       line-height: 1.2;
+      letter-spacing: -0.3px;
     }
 
     .scratch-content p {
@@ -282,6 +279,7 @@
 </head>
 <body>
 
+  <!-- Background Animated Blobs -->
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -294,6 +292,7 @@
       <p class="subtitle">5. septembar 2026.</p>
     </header>
 
+    <!-- Odbrojavanje -->
     <div class="glass-card countdown-card">
       <div class="countdown-title">⏳ Odbrojavanje do žurke</div>
       <div class="timer">
@@ -304,9 +303,11 @@
       </div>
     </div>
 
+    <!-- Srećke za grebanje -->
     <div class="section-title">🪙 Ogrebi i otkrij detalje</div>
     <div class="scratch-container">
       
+      <!-- Kartica 1 -->
       <div class="glass-card scratch-card" id="card1">
         <div class="scratch-content">
           <h3>🏡 Rođendan je u Lukinoj kući!</h3>
@@ -315,6 +316,7 @@
         <canvas id="scratch1"></canvas>
       </div>
 
+      <!-- Kartica 2 -->
       <div class="glass-card scratch-card" id="card2">
         <div class="scratch-content">
           <h3>⏰ Početak u 17:00h!</h3>
@@ -325,6 +327,7 @@
 
     </div>
 
+    <!-- Lokacija -->
     <div class="glass-card location-card">
       <div class="section-title">📍 Lokacija</div>
       <p>1. Srpski ustanak 12</p>
@@ -365,7 +368,6 @@
     function initScratchCard(canvasId, cardId) {
       const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext('2d');
-      const card = document.getElementById(cardId);
       
       let width, height;
       
@@ -383,7 +385,7 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, width, height);
 
-        ctx.font = '800 16px "Baloo 2", sans-serif';
+        ctx.font = '800 16px system-ui, sans-serif';
         ctx.fillStyle = '#f8fafc';
         ctx.textAlign = 'center';
         ctx.shadowColor = 'rgba(0,0,0,0.5)';
