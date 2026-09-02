@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lukin 12. Rođendan!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;800&subset=latin-ext&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     :root {
@@ -275,7 +277,6 @@
       padding-bottom: 25px;
     }
 
-    /* Mobile Tilt Effect Fallback */
     @media (hover: hover) {
       .glass-card:hover {
         transform: translateY(-5px) rotateX(4deg) rotateY(-2deg);
@@ -346,7 +347,6 @@
   </div>
 
   <script>
-    // Tajmer do 5. septembra 2026. u 17:00h
     const targetDate = new Date('September 5, 2026 17:00:00').getTime();
 
     function updateTimer() {
@@ -373,7 +373,6 @@
     setInterval(updateTimer, 1000);
     updateTimer();
 
-    // Napredna funkcija za grebanje sa konfetama
     function initScratchCard(canvasId, cardId) {
       const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext('2d');
@@ -387,7 +386,6 @@
         canvas.width = width;
         canvas.height = height;
 
-        // 3D Metallic Gradient Prevlaka
         const grad = ctx.createLinearGradient(0, 0, width, height);
         grad.addColorStop(0, '#475569');
         grad.addColorStop(0.5, '#94a3b8');
@@ -396,8 +394,7 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, width, height);
 
-        // Tekst na srećki
-        ctx.font = 'bold 16px "Fredoka", sans-serif';
+        ctx.font = 'bold 16px "Fredoka", "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#f8fafc';
         ctx.textAlign = 'center';
         ctx.shadowColor = 'rgba(0,0,0,0.5)';
@@ -423,13 +420,11 @@
 
         const percentage = (clearPixels / (pixels.length / 4)) * 100;
         
-        // Kada se ogrebe više od 40%, aktiviraju se konfete
         if (percentage > 40) {
           confettiTriggered = true;
           canvas.style.opacity = '0';
           setTimeout(() => canvas.remove(), 500);
 
-          // Pokreni konfete!
           confetti({
             particleCount: 80,
             spread: 70,
