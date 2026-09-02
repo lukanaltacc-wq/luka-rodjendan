@@ -361,7 +361,7 @@
       height: 100%;
       border: none;
       filter: invert(90%) hue-rotate(180deg) contrast(1.2);
-      pointer-events: none; /* Omogućava klik na celo polje za otvaranje mapa */
+      pointer-events: none;
     }
 
     .maps-btn {
@@ -396,11 +396,13 @@
 </head>
 <body>
 
+  <!-- Background Animated Blobs -->
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
   </div>
 
+  <!-- INTRO KOVERTA -->
   <div id="intro-overlay">
     <div class="envelope-card">
       <div class="envelope-icon">✉️</div>
@@ -410,6 +412,7 @@
     </div>
   </div>
 
+  <!-- GLAVNI SADRŽAJ SAJTA -->
   <div class="container" id="main-content">
     <header>
       <div class="tag">🎉 VIP Pozivnica</div>
@@ -417,6 +420,7 @@
       <p class="subtitle">5. septembar 2026.</p>
     </header>
 
+    <!-- Odbrojavanje -->
     <div class="glass-card countdown-card">
       <div class="countdown-title">⏳ Odbrojavanje do žurke</div>
       <div class="timer">
@@ -427,9 +431,11 @@
       </div>
     </div>
 
+    <!-- Srećke za grebanje -->
     <div class="section-title">🪙 Ogrebi i otkrij detalje</div>
     <div class="scratch-container">
       
+      <!-- Kartica 1 -->
       <div class="glass-card scratch-card" id="card1">
         <div class="scratch-content">
           <h3>🏡 Rođendan je u Lukinoj kući!</h3>
@@ -438,6 +444,7 @@
         <canvas id="scratch1"></canvas>
       </div>
 
+      <!-- Kartica 2 -->
       <div class="glass-card scratch-card" id="card2">
         <div class="scratch-content">
           <h3>⏰ Početak u 17:00h!</h3>
@@ -448,13 +455,15 @@
 
     </div>
 
+    <!-- Google Maps Sekcija sa TAČNIM KOORDINATAMA -->
     <div class="glass-card location-card">
       <div class="section-title">📍 Lokacija</div>
       <div class="address-text">1. Srpski ustanak 12</div>
       
-      <a href="https://www.google.com/maps/search/?api=1&query=1.+Srpski+ustanak+12" target="_blank" style="text-decoration: none; display: block;">
+      <!-- Klikabilna mapa sa tačnim koordinatama -->
+      <a href="https://www.google.com/maps/search/?api=1&query=44.0089131,20.9309111" target="_blank" style="text-decoration: none; display: block;">
         <div class="map-preview">
-          <iframe src="https://maps.google.com/maps?q=1.%20Srpski%20ustanak%2012&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+          <iframe src="https://maps.google.com/maps?q=44.0089131,20.9309111&t=&z=17&ie=UTF8&iwloc=&output=embed"></iframe>
         </div>
         <div class="maps-btn">
           📍 Otvori u Google Maps
@@ -468,7 +477,6 @@
   </div>
 
   <script>
-    // Otvaranje pozivnice sa konfetama
     function openInvitation() {
       const overlay = document.getElementById('intro-overlay');
       const content = document.getElementById('main-content');
@@ -481,7 +489,6 @@
         content.style.opacity = '1';
         content.style.transform = 'translateY(0)';
         
-        // Vatromet konfeta pri otvaranju
         confetti({
           particleCount: 100,
           spread: 80,
@@ -490,7 +497,6 @@
       }, 600);
     }
 
-    // Tajmer do 5. septembra 2026. u 17:00h
     const targetDate = new Date('September 5, 2026 17:00:00').getTime();
 
     function updateTimer() {
@@ -517,7 +523,6 @@
     setInterval(updateTimer, 1000);
     updateTimer();
 
-    // Srećke za grebanje
     function initScratchCard(canvasId) {
       const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext('2d');
