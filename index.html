@@ -381,7 +381,91 @@
       width: 100%;
     }
 
-    .maps-btn:active {
+    /* RSVP FORMA (POTVRDA DOLASKA) */
+    .rsvp-card {
+      padding: 25px;
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .rsvp-card .section-title {
+      justify-content: flex-start;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(15, 23, 42, 0.6);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"] {
+      accent-color: var(--accent-pink);
+      width: 18px;
+      height: 18px;
+    }
+
+    .radio-option span {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .submit-btn {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      color: #fff;
+      border: none;
+      padding: 16px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 10px 20px rgba(5, 217, 232, 0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .submit-btn:active {
       transform: scale(0.96);
     }
 
@@ -455,20 +539,49 @@
 
     </div>
 
-    <!-- Google Maps Sekcija sa TAČNIM KOORDINATAMA -->
+    <!-- Google Maps Sekcija -->
     <div class="glass-card location-card">
       <div class="section-title">📍 Lokacija</div>
       <div class="address-text">1. Srpski ustanak 12</div>
       
-      <!-- Klikabilna mapa sa tačnim koordinatama -->
-      <a href="https://www.google.com/maps/search/?api=1&query=44.0089131,20.9309111" target="_blank" style="text-decoration: none; display: block;">
+      <a href="http://googleusercontent.com/maps.google.com/4" target="_blank" style="text-decoration: none; display: block;">
         <div class="map-preview">
-          <iframe src="https://maps.google.com/maps?q=44.0089131,20.9309111&t=&z=17&ie=UTF8&iwloc=&output=embed"></iframe>
+          <iframe src="http://googleusercontent.com/maps.google.com/5"></iframe>
         </div>
         <div class="maps-btn">
           📍 Otvori u Google Maps
         </div>
       </a>
+    </div>
+
+    <!-- FORMA ZA POTVRDU DOLASKA (RSVP) -->
+    <div class="glass-card rsvp-card">
+      <div class="section-title">✉️ Potvrdi dolazak</div>
+      
+      <!-- OVDE JE UBAČEN TVOJ FORMSPREE ID: xljanzrk -->
+      <form action="https://formspree.io/f/xljanzrk" method="POST">
+        
+        <div class="form-group">
+          <label for="name">Ime i Prezime:</label>
+          <input type="text" id="name" name="Ime i Prezime" class="form-input" placeholder="Unesi svoje ime..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Da li dolaziš na žurku?</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="Dolazak" value="Dolazim! 🎉" checked>
+              <span>✅ Dolazim! 🎉</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Dolazak" value="Nažalost ne mogu 😢">
+              <span>❌ Nažalost, ne mogu 😢</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Pošalji odgovor 🚀</button>
+      </form>
     </div>
 
     <footer>
