@@ -28,7 +28,7 @@
     html, body {
       width: 100%;
       min-height: 100vh;
-      background: #0f172a; /* Rezervna tamna boja da nema belih traka */
+      background: #0f172a;
       background-image: var(--bg-gradient);
       background-attachment: fixed;
       color: var(--text-main);
@@ -43,13 +43,13 @@
       padding: 20px 15px;
     }
 
-    /* Animated Blobs (Sređeno da ne pravi bele ivice) */
+    /* Background Blobs */
     .bg-blobs {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
@@ -65,17 +65,17 @@
 
     .blob-1 {
       top: 5%;
-      left: -10%;
-      width: 250px;
-      height: 250px;
+      left: -5%;
+      width: 220px;
+      height: 220px;
       background: var(--accent-pink);
     }
 
     .blob-2 {
       bottom: 5%;
-      right: -10%;
-      width: 280px;
-      height: 280px;
+      right: -5%;
+      width: 250px;
+      height: 250px;
       background: var(--accent-purple);
       animation-delay: -4s;
     }
@@ -354,7 +354,7 @@
     .map-preview {
       position: relative;
       width: 100%;
-      height: 200px;
+      height: 220px;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -366,7 +366,7 @@
     .map-preview iframe {
       width: 100%;
       height: 100%;
-      border: 0;
+      border: none;
     }
 
     .maps-btn {
@@ -544,20 +544,20 @@
 
     </div>
 
-    <!-- Google Maps Lokacija -->
+    <!-- Google Maps Lokacija za Kragujevac -->
     <div class="glass-card location-card">
       <div class="section-title">📍 Lokacija</div>
-      <div class="address-text">1. Srpski ustanak 12</div>
+      <div class="address-text">1. Srpski ustanak 14, Kragujevac</div>
       
       <div class="map-preview">
         <iframe 
-          src="https://maps.google.com/maps?q=Prvog+srpskog+ustanaka+12,+Smederevska+Palanka&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+          src="https://maps.google.com/maps?q=I+srpskog+ustanka+14,+Kragujevac&t=&z=16&ie=UTF8&iwloc=&output=embed" 
           allowfullscreen="" 
           loading="lazy">
         </iframe>
       </div>
 
-      <a href="https://maps.google.com/?q=Prvog+srpskog+ustanaka+12,+Smederevska+Palanka" target="_blank" style="text-decoration: none; display: block;">
+      <a href="https://maps.google.com/?q=I+srpskog+ustanka+14,+Kragujevac" target="_blank" style="text-decoration: none; display: block;">
         <div class="maps-btn">
           📍 Otvori u Google Maps
         </div>
