@@ -2,7 +2,7 @@
 <html lang="sr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Lukin 12. Rođendan!</title>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
@@ -25,25 +25,31 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    body {
-      background: var(--bg-gradient);
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 15px;
+    html, body {
+      width: 100%;
       min-height: 100vh;
+      background: #0f172a; /* Rezervna tamna boja da nema belih traka */
+      background-image: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
       overflow-x: hidden;
     }
 
-    /* Background Animated Blobs */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px 15px;
+    }
+
+    /* Animated Blobs (Sređeno da ne pravi bele ivice) */
     .bg-blobs {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
       overflow: hidden;
       pointer-events: none;
@@ -58,25 +64,25 @@
     }
 
     .blob-1 {
-      top: 10%;
-      left: 10%;
-      width: 280px;
-      height: 280px;
+      top: 5%;
+      left: -10%;
+      width: 250px;
+      height: 250px;
       background: var(--accent-pink);
     }
 
     .blob-2 {
-      bottom: 10%;
-      right: 10%;
-      width: 320px;
-      height: 320px;
+      bottom: 5%;
+      right: -10%;
+      width: 280px;
+      height: 280px;
       background: var(--accent-purple);
       animation-delay: -4s;
     }
 
     @keyframes float {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-40px) scale(1.1); }
+      100% { transform: translateY(-30px) scale(1.08); }
     }
 
     /* ENVELOPE / INTRO OVERLAY */
@@ -348,20 +354,19 @@
     .map-preview {
       position: relative;
       width: 100%;
-      height: 180px;
+      height: 200px;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.15);
       margin-bottom: 15px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      background: #1e293b;
     }
 
     .map-preview iframe {
       width: 100%;
       height: 100%;
-      border: none;
-      filter: invert(90%) hue-rotate(180deg) contrast(1.2);
-      pointer-events: none;
+      border: 0;
     }
 
     .maps-btn {
@@ -381,7 +386,7 @@
       width: 100%;
     }
 
-    /* RSVP FORMA (POTVRDA DOLASKA) */
+    /* RSVP FORMA */
     .rsvp-card {
       padding: 25px;
       margin-bottom: 25px;
@@ -539,15 +544,20 @@
 
     </div>
 
-    <!-- Google Maps Sekcija -->
+    <!-- Google Maps Lokacija -->
     <div class="glass-card location-card">
       <div class="section-title">📍 Lokacija</div>
       <div class="address-text">1. Srpski ustanak 12</div>
       
-      <a href="http://googleusercontent.com/maps.google.com/4" target="_blank" style="text-decoration: none; display: block;">
-        <div class="map-preview">
-          <iframe src="http://googleusercontent.com/maps.google.com/5"></iframe>
-        </div>
+      <div class="map-preview">
+        <iframe 
+          src="https://maps.google.com/maps?q=Prvog+srpskog+ustanaka+12,+Smederevska+Palanka&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <a href="https://maps.google.com/?q=Prvog+srpskog+ustanaka+12,+Smederevska+Palanka" target="_blank" style="text-decoration: none; display: block;">
         <div class="maps-btn">
           📍 Otvori u Google Maps
         </div>
@@ -558,7 +568,6 @@
     <div class="glass-card rsvp-card">
       <div class="section-title">✉️ Potvrdi dolazak</div>
       
-      <!-- OVDE JE UBAČEN TVOJ FORMSPREE ID: xljanzrk -->
       <form action="https://formspree.io/f/xljanzrk" method="POST">
         
         <div class="form-group">
